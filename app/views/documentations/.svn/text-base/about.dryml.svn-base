@@ -1,0 +1,19 @@
+<page>
+    <title:>
+    	TopFIND : about & citation
+    </title:>
+  <content:>
+	<section class="content-body">  
+    <h2>About</h2>
+
+				
+				<p>TopFIND has been designed and developed by <a href="mailto:plange@interchange.ubc.ca">Philipp F. Lange</a> in the <a href="http://clip.ubc.ca">research group of Christopher M. Overall</a> at the Center for Blood Reaserch, University of British Columbia</p>
+    <h2>Publications</h2>
+
+				
+				<p>Please cite the following paper if you use the TopFIND webservice or any of the provided downloads or exports for your research</p>
+				<p>Lange P.F. and Overall C.M., <i>Linking protein termini with underlying proteolytic processing and modifications altering protein function and stability</i>, Nature Methods 2011, submitted</p>				
+				
+	</section>   
+  </content:>
+</page>

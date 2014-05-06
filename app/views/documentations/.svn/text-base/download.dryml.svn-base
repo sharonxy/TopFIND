@@ -1,0 +1,13 @@
+<page>    
+    <title:>
+    	Download : TopFIND - A knowledgebase combining protein termini, protein processing, cleavage site specificity and functional annotation in the protease web
+    </title:>
+  <content:>
+	<section class="content-body">  
+    <h2>Download</h2>			
+				<p>A complete compressed sql dump of the TopFIND database can be downloaded [<a href ="/topcat/downloads/TOPCAT-v0.1-110415.sql.gz">TopFIND-v0.1-110415.sql.gz</a> 491.7 MB].</p>
+				<p>License information can be found <a href="/topfind/license">here</a> and please do not forget to <a href="/topfind/about">cite us</a> if you use TopFIND or the database dump for your research</p>
+				
+	</section>   
+  </content:>
+</page>

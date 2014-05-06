@@ -1,0 +1,16 @@
+xml.instruct!
+xml.proteins do
+p = @protein
+  xml.protein do
+	  xml.ac p.ac
+	  xml.name p.name
+	  xml.ntermini do
+	    @nterms.each do |nt|
+	      xml.nterminus do
+	        xml.position nt.pos
+	      end
+	    end
+	  end
+  end
+end
+
