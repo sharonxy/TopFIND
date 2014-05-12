@@ -1,0 +1,6 @@
+thin --prefix /topfind start
+ - gene names or protein names in name display
+ - find paths where last cleavage is at the right position
+ - see evidences for cleavages
+ - filterable graph before search (use topfind filter)
+ - chose between mouse and human edges

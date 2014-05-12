@@ -1,0 +1,602 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+      <title>
+    	TopFIND - A knowledgebase combining protein termini, protein processing, cleavage site specificity and functional annotation in the protease web
+    </title>
+		<meta content="TopFIND (Terminus Oriented Protein Function INferred Database) is a knowledgebase for protein termini, protease processing and protein function." name="description" />
+		<meta content="terminus,termini,protein terminus,amino terminus,amino termini,carboxy terminus,carboxy termini,c-terminus,n-terminus,protease,protein,cleavage,specificity,proteolyisis,protease web,protein database,termini database,protein termini database,protein terminus database,protein cleavage database,protease database,human,h. sapiens,homo sapiens,mus musculus,mouse,e-coli,yeast,arabidopsis,a. thaliana,arabidopsis thaliana,protease substrate,substrate identification,protease inhibition,inhibitor,Philipp F. Lange,Philipp Lange,UBC,Nature Methods,terminus database,Terminus Oriented Protein Function INferred Database,HPP,Human Proteome Project,Chromosme,UniProt,UniProtKB,NextProt,Merops,CutDB,ProeaseDB,protease cleavage site,protease specificity,Overall Lab,Overall Laboratory,systems biology,knowledgebase,protein function,portein knowledgebase,function,heatmap,protease web,protease cleavage database,protease substrate,protease substrate database,protease specificity,cleavage site specificity" name="keywords" />
+  	
+      
+      
+  <link href="/topfind/stylesheets/reset.css?1342150199" media="screen" rel="stylesheet" type="text/css" />
+
+      
+    <link href="/topfind/hobothemes/edge1/stylesheets/edge1.css" media="all" rel="Stylesheet" type="text/css" />
+
+      
+    <link href="/topfind/hobothemes/edge1/stylesheets/rapid-ui.css" media="all" rel="Stylesheet" type="text/css" />
+
+    
+
+      
+        
+  
+  
+    
+      <script src="/topfind/javascripts/prototype.js?1342149009" type="text/javascript"></script>
+    
+      <script src="/topfind/javascripts/effects.js?1342149009" type="text/javascript"></script>
+    
+      <script src="/topfind/javascripts/dragdrop.js?1342149009" type="text/javascript"></script>
+    
+      <script src="/topfind/javascripts/controls.js?1342149009" type="text/javascript"></script>
+    
+      <script src="/topfind/javascripts/lowpro.js?1342149009" type="text/javascript"></script>
+    
+      <script src="/topfind/javascripts/hobo-rapid.js?1342149009" type="text/javascript"></script>
+    
+  
+
+        
+  <!--[if lt IE 7]>
+          
+  
+  
+    
+      <script src="/topfind/javascripts/IE7.js?1342149009" type="text/javascript"></script>
+    
+  
+
+          
+  
+  
+    
+      <script src="/topfind/javascripts/ie7-recalc.js?1342149009" type="text/javascript"></script>
+    
+  
+
+        <![endif]-->
+
+        
+	  <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
+      
+      
+  
+  
+    
+      <script src="/topfind/javascripts/jquery.sparkline.min.js?1342149009" type="text/javascript"></script>
+    
+  
+ 
+      
+  
+  
+    
+      <script src="/topfind/javascripts/custom-sparklines.js?1342149009" type="text/javascript"></script>
+    
+  
+
+      
+  
+  
+    
+      <script src="/topfind/javascripts/jquery.watermark.min.js?1342149009" type="text/javascript"></script>
+    
+  
+
+      
+  
+  
+    
+      <script src="/topfind/javascripts/jquery.activity-indicator-1.0.0.min.js?1342149009" type="text/javascript"></script>
+    
+  
+
+      
+  
+  
+    
+      <script src="/topfind/javascripts/cytoscapeweb/js/min/json2.min.js?1342149009" type="text/javascript"></script>
+    
+  
+
+      
+  
+  
+    
+      <script src="/topfind/javascripts/cytoscapeweb/js/min/AC_OETags.min.js?1342149009" type="text/javascript"></script>
+    
+  
+
+      
+  
+  
+    
+      <script src="/topfind/javascripts/cytoscapeweb/js/min/cytoscapeweb.min.js?1342149009" type="text/javascript"></script>
+    
+  
+
+		<script type="text/javascript">
+		
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-22592708-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		
+		</script>  
+    
+        
+  
+  
+    
+      <script src="/topfind/javascripts/application.js?1342149009" type="text/javascript"></script>
+    
+  
+
+      
+    </head>
+
+    <body>
+      
+        
+  <div id="ajax-progress">
+    <div>
+      <span id="ajax-progress-text"></span>
+    </div>
+  </div>
+
+        
+  
+  <div class="header page-header">
+          
+  
+    <ul class="navigation account-nav">
+      
+      
+      
+        <li class="nav-item log-in"><a href="http://clipserve.clip.ubc.ca/topfind/login">Log in</a></li>
+        <li class="nav-item sign-up"><a href="http://clipserve.clip.ubc.ca/topfind/users/signup">Sign up</a></li>
+      
+    </ul>
+  
+
+          <h1 class="app-name"><a href="/topfind/">TopFIND</a></h1>
+          
+          
+  
+  
+  <div class="section logo">
+    
+    
+  	<!--<div id="logo"><a href="#{base_url}/"><img src="/topfind/images/logo.png"/></a></div>-->
+	<div id="textlogo"><a href="/topfind/">TopFIND<sup><span style="font-size:0.5em;">2.0</span></sup></a></div>
+  
+  </div>
+
+  
+  
+  <ul class="navigation main-nav">
+    
+      
+    
+    <li class="" style="border-left:0px;">
+    <a href="">&nbsp;</a>
+  </li>
+
+    
+    <li class="">
+    <a href="/topfind/">Home</a>
+  </li>
+
+    
+    <li class="">
+    <a class="class-link" href="/topfind/proteins">Proteins</a>
+  </li>
+
+    
+    <li class="">
+    <a href="/topfind/ntermini">N termini</a>
+  </li>
+
+    
+    <li class="">
+    <a href="/topfind/ctermini">C termini</a>
+  </li>
+
+    
+    <li class="">
+    <a class="class-link" href="/topfind/terminusmodifications">Modifications</a>
+  </li>
+
+    
+    <li class="">
+    <a href="/topfind/api/">API</a>
+  </li>
+
+    
+    <li class="">
+    <a href="/topfind/contribute/">Contribute</a>
+  </li>
+
+    
+    <li class="">
+    <a href="/topfind/documentation/">Help</a>
+  </li>
+
+    <li class="top-search" href="" style="border-right:0px;">    
+      <form action="/topfind/proteins" method="get"><div class="hidden-fields"></div>
+        <input name="query" type="text" /><button for="search">Search</button>
+      </form>
+    </li>  
+  
+    
+  </ul>
+ 
+  
+
+  	<div id="pagespinner"></div>
+
+    
+
+        </div>
+
+        
+		
+      <div class="section-group"><div class="section-group-inner page-content">
+      
+  
+  <div class="section content">
+    
+    
+
+
+	
+  
+  <div class="section content-body">
+    
+    
+		
+  
+  <div class="section " id="frontsearch">
+    
+    
+			<form action="/topfind/proteins" method="get"><div class="hidden-fields"></div>
+			   <div id="normalsearch">
+			   	<input class="large" name="query" type="text" />
+  
+  
+    <input class="button submit-button" type="submit" value="search" />
+  
+	 
+			    <a href="#" onclick="jQuery('.frontsearch').toggle();; return false;">advanced</a> <img alt="?" class="help" src="/topfind/images/help.png" title="The andvance search allows you to specify additional parameter individually or in combination to narrow down your search results. All parameters, including the standard text field can be combined.&lt;br/&gt;
+Search by chromsome location of the encoding genes is limited to &lt;i&gt;Homo sapiens&lt;/i&gt; and &lt;i&gt;Mus musculus&lt;/i&gt;.&lt;br/&gt;
+Please refere to the search examples and individual help notes for further details." /> |  <a href="#" onclick="jQuery('#searchexample').toggle();; return false;">example input</a>
+			    <script>jQuery('.large').watermark('name, UniProt ID, MEROPS family ID, ...'), {className: 'watermark'};</script>
+			   </div>
+				   <div id="searchexample" class="hide">
+				   	    
+				    
+				    <div class="solidbox">
+					   	<div class="category"><b>Normal search:</b></div>
+						  <p> 
+						   	<ul>
+							   	<li>Search by UniProt accession: <a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=P41245">P41245</a></li>
+								<li>Search by protein name: <a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=CTGF">CTGF</a></li>
+								<li>Search by part of a protein name: <a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=Chloride+channel">Chloride channel</a></li>
+								<li>Search by MEROPS protease code: <a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=M10.004">M10.004</a> (<a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=M10.004&amp;function=protease"> limit to proteases by selecting function 'protease' from the advanced options)</a></li>
+								<li>Search by MEROPS protease family ID: <a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=M10">M10</a> (<a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=M10&amp;function=protease">limit to proteases by selecting function 'protease' from the advanced options)</a></li>
+						   	</ul>
+						</p>   
+						<div class="category"><b>Advanced search</b></div>
+						   <p>
+						   	<ul>
+							   	<li><a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=&amp;species=Homo+sapiens&amp;modification=&amp;function=&amp;chromosome=6&amp;chromosomeposition=&amp;minntermini=&amp;minctermini=">Select 'Homo sapiens' from the species list, 'protease' from the function list and enter '6' into the filed for chromosome to list all human proteases encoded on chromsome 6.</a></li>
+								<li><a href="http://clipserve.clip.ubc.ca/topfind/proteins?query=&amp;species=&amp;modification=Acetylation&amp;function=&amp;chromosome=&amp;chromosomeposition=&amp;minntermini=5&amp;minctermini=">Enter '5' into the field form minimum number of N termini and select 'acetylated' from the modification list to list all proteins that have at least 5 N termini annotated and have been shown to be acetylated at at least one of their termini.</a></li>
+						   	</ul>
+						</p>   	
+					   	<div class="category"><b>Protein names and identifiers</b></div>
+						<p>You can find protein names and identifiers at:
+						   	<ul>
+							   	<li><a href="http://www.uniprot.org" target="_blank">UniProt</a></li>
+							   	<li><a href="http://merops.sanger.ac.uk/" target="_blank">MEROPS</a></li>
+						   	</ul>
+						</p>
+				   </div>
+				   </div>
+			   
+				   <div id="advancedsearch" class="hide frontsearch">
+				   	
+  
+    <table><tr>
+				   	<td id="leftsearchcol">
+				   		<ul>
+				   			<li>Species</li>
+				   			<ul><li>
+				   				<select name="species" id="osselect">
+							      <option></option>
+							      
+							        <option >Homo sapiens</option>
+							      
+							        <option >Mus musculus</option>
+							      
+							        <option >Escherichia coli</option>
+							      
+							        <option >Saccharomyces cerevisiae</option>
+							      
+							        <option >Arabidopsis thaliana</option>
+							      
+								</select>
+							</li></ul>
+							<li>Modification <img alt="?" class="help" src="/topfind/images/help.png" title="Restrict the search to proteins containing a specific amino acid modification at their N- or C-terminus" /></li>
+						    <ul><li>
+								<select name="modification" id="modselect">
+							        <option></option>
+							      
+							        <option >unknown</option>
+							      
+							        <option >Methylation</option>
+							      
+							        <option >Acetylation</option>
+							      
+							        <option >Phosphoprotein</option>
+							      
+							        <option >Formylation</option>
+							      
+							        <option >Pyrrolidone carboxylic acid</option>
+							      
+							        <option >Pyruvate</option>
+							      
+							    </select>
+						    </li></ul>
+						    <li>Function <img alt="?" class="help" src="/topfind/images/help.png" title="Restrict the search to proteases or inhibitors of proteases" /></li>
+						    <ul><li>
+								<select name="function">
+						            <option></option>
+						          
+						            <option >protease</option>
+						          
+						            <option >inhibitor</option>
+						          
+						        </select>
+						    </li></ul>
+					    </ul>
+				    </td>
+					<td id="middlesearchcol">
+				   		<ul>
+				   			<li>Genomic location<img alt="?" class="help" src="/topfind/images/help.png" title="(only available for Homo sapiens and Mus musculus)&lt;br/&gt;
+You can restrict the search to proteins encoded by genes located in a specifc genomic region. Please specify at least the chromosome and enter values for arm and band to narrow your search further." /></li>
+				   			<ul>
+								<li><input id="chromosome" name="chromosome" size="4" type="text" />
+									Chromosome <img alt="?" class="help" src="/topfind/images/help.png" title="Chromosome identifier (e.g. '6' for human chromosome 6)" />
+								</li>
+								<li><input id="chromosomeposition" name="chromosomeposition" size="4" type="text" />
+									Position on chromosome <img alt="?" class="help" src="/topfind/images/help.png" title="Limit by chromosome position:&lt;br/&gt;
+e.g. 'p' or 'p24' in &lt;i&gt;Homo sapiens&lt;/i&gt; or 'B3.1' for &lt;i&gt;Mus musculus&lt;/i&gt;&lt;br/&gt;
+(only supported for &lt;i&gt;Homo sapiens&lt;/i&gt; and &lt;i&gt;Mus musculus&lt;/i&gt;)" />
+								</li>
+							</ul>
+						</ul>
+				    </td>	
+					<td id="rightsearchcol">
+				   		<ul>
+				   			<li>Minum number of  <img alt="?" class="help" src="/topfind/images/help.png" title="Please enter the minimum number of N and/or C termini that need to be annotated for a protein to be listed." /></li>
+				   			<ul>
+								<li><input id="minntermini" name="minntermini" size="4" type="text" />
+									N termini
+								</li>
+								<li><input id="minctermini" name="minctermini" size="4" type="text" />
+									C termini
+								</li>
+							</ul>
+							<li></li>
+							<li id="advancedsubmit">
+  
+  
+    <input class="button submit-button" type="submit" value="search" />
+  
+</li>
+					    </ul>
+				    </td>
+				    </tr>
+				    </table>
+  
+  
+				    
+				</div>   
+			</form>
+		
+  </div>
+
+		
+  
+  <div class="section " id="intro">
+    
+    
+			
+  
+  <div class="section cols">
+    
+    
+				
+  
+  <div class="section intros" id="intro1">
+    
+    
+					<h3>WELCOME</h3>
+					<ul>
+						<li>TopFIND is the first public knowledgebase for protein termini and protease processing</li>
+						<li><hr /></li>
+						<li>More than 120,000 N- and C-termini and almost 10,000 cleavages listed</li>
+						<li><hr /></li>
+						<li>Covers <i>H. sapiens</i>, <i>M. musculus</i>, <i>S. cerevisiae</i>, <i>A. thaliana</i> and <i>E. coli</i></li>
+					</ul>
+				
+  </div>
+
+			
+  </div>
+
+			
+  
+  <div class="section cols">
+    
+    
+				
+  
+  <div class="section intros" id="intro2">
+    
+    
+					<h3>WHAT TopFIND PROVIDES</h3>
+					<ul>
+						<li>Integration of protein termini with proteolytic processing and protein features</li>
+						<li><hr /></li>
+						<li>Displays proteases and substrates within their protease web including detailed evidence information</li>
+						<li><hr /></li>
+						<li>Fully supports the Human Proteom Project through search by chromosome location</li>
+					</ul>			
+				
+  </div>
+
+			
+  </div>
+
+			
+  
+  <div class="section cols">
+    
+    
+				
+  
+  <div class="section intros" id="intro3">
+    
+    
+					<h3>CONTRIBUTE</h3>
+					<ul>
+						<li>Submit your N- or C-termini datasets</li>
+						<li><hr /></li>
+						<li>Contribute information on protein cleavages</li>
+						<li><hr /></li>
+						<li>Provide detailed experimental description, sample information and raw data</li>
+					</ul>			
+				
+  </div>
+
+			
+  </div>
+
+		
+  </div>
+
+	
+  </div>
+
+  
+  </div>
+ 
+      
+  
+  
+
+      </div></div>
+    
+        
+  
+  <div class="footer page-footer">
+    	<div id="ubclogo">
+    		<a href="http://www.ubc.ca" target="_blank"><img src="/topfind/images/ubclogo.png" /></a>
+    	</div>
+    	<div id="lablogo">
+    		<a href="http://clip.ubc.ca" target="_blank"><img src="/topfind/images/lablogo.png" /></a>
+    	</div>	
+    	<div id="publication">
+        &copy; 2010-2012 | <a href="/topfind/about">About</a> |
+          <a href="/topfind/license">License &amp; Disclaimer</a> |
+          <a href="mailto:plange@interchange.ubc.ca">Contact</a> |
+          <a href="/topfind/download">Downloads</a><br />
+    		<a href="http://www.nature.com/nmeth/journal/v8/n9/full/nmeth.1669.html" target="_blank">Philipp F. Lange &amp; Christopher M. Overall, <b>Nature Methods</b> 8, 703&minus;704 (2011)</a> <a href="/topfind/downloads/2011-NMeth-Lange_and_Overall.pdf" target="_blank">[pdf]</a> <br />
+        <a href="http://nar.oxfordjournals.org/content/40/D1/D351.short" target="_blank">Philipp F. Lange, Pitter F. Huesgen, Christopher M. Overall, <b>Nucleic Acids Research</b> 40 (D1), D351-D361 (2012)</a> <a href="http://nar.oxfordjournals.org/content/40/D1/D351.full-text-lowres.pdf" target="_blank">[pdf]</a>
+    	</div> 
+    	<div class="bottom">&nbsp;</div>
+<!-- overlayed element -->
+<div class="apple_overlay" id="overlay">
+
+	<!-- the external content is loaded inside this tag -->
+	<div class="contentWrap"></div>
+
+</div>    	
+	<script>
+    jQuery(document).ready(function() {
+		jQuery("a.popup[rel]").overlay({
+		    mask: 'white',
+			//effect: 'apple',
+			onBeforeLoad: function() {
+				// grab wrapper element inside content
+				var wrap = this.getOverlay().find(".contentWrap");
+				// load the page specified in the trigger
+				wrap.load(this.getTrigger().attr("href"));
+			}
+		});});
+	</script>
+	
+	<!-- loadindicator overlay element -->
+	<div class="load_overlay" id="overlay">
+	
+		<div id="pagespinner2"></div>
+	
+	</div>   
+	<script>
+		jQuery(document).ready(function() {  jQuery('#pagespinner2').activity({segments: 12, width: 4, space: 4, length: 20, color: 'orange', speed: 1.0});} );
+	</script>
+	<script>
+    jQuery(window).bind('beforeunload', function() { 
+		jQuery(".load_overlay").overlay({
+			// custom top position
+			top: 150,
+		
+			// some mask tweaks suitable for facebox-looking dialogs
+			mask: {
+		
+				// you might also consider a "transparent" color for the mask
+				color: '#fefefe',
+		
+				// load mask a little faster
+				loadSpeed: 200,
+		
+				// very transparent
+				opacity: 0.7
+			},
+		
+			// disable this for modal dialog-type of overlays
+			closeOnClick: false,
+		
+			// load it immediately after the construction
+			load: true
+		});});
+	</script>
+		
+	<script>jQuery(document).ready(function() {jQuery("img[title]").tooltip({offset:[-15,0],position: "top center"}).dynamic({ bottom: { direction: "down", bounce: true } });})</script>   		            		
+	<script>
+		//jQuery(window).bind('beforeunload', function() {  jQuery('#pagespinner').activity({segments: 12, width: 4, space: 4, length: 20, color: 'black', speed: 1.0});} );
+	</script>
+	<!-- extra styling for labinternal pages -->
+	
+    
+    </div>
+
+        
+  <script type="text/javascript">
+    var hoboParts = {};var pluralisations = {species: 'species', goprocess: 'goprocesses'}; urlBase = '/topfind'; hoboPagePath = 'front/index'; formAuthToken = { name: 'authenticity_token', value: 'WxALL3o8/idetpcEuGpqaTfH8Eg1oKw/1fjQF5BEIb8=' }
+    
+  </script>
+
+      
+    </body>
+  
+  </html>

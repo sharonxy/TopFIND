@@ -10,7 +10,7 @@ class ProteinsController < ApplicationController
   autocomplete :name, :query_scope => [:name_contains, :ac_contains]
   auto_actions :all
   show_actions :filter
-  
+   
   def index
   	
     @documentations = Documentation.all.group_by(&:name)

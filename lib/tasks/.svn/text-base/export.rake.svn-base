@@ -1,0 +1,137 @@
+desc "export cleavages and inhibitions to csv for cytoscape"
+task :export_cytoscape => :environment do
+  
+  require 'fastercsv'
+  
+  # proteins = ["P78330", "Q91XD6", "Q9DCV7", "P20152", "Q9Z0F7", "Q05920", "P16015", "P03953", "P19001", "Q91WS0", "O09165", "P37804", "P12787", "Q9ET01", "P04117", "P19096", "Q16762", "P07356", "Q8BFR5", "Q8QZS1", "Q8BMS1", "Q8BH95", "P58252", "P48774", "P31786", "P30115", "P61978","P07724", "P49817", "Q9CR68", "Q61805", "Q7TMF3", "P31725", "Q3UIU2", "P56480", "P07910", "Q8VEK3", "P29699", "O09164", "Q60932", "O88696", "Q00839", "P10649", "P01791", "Q8R1I1", "P01027", "P49945", "Q80W21", "Q9CPQ1", "P53996", "P01873", "Q8NC51", "O88569", "O35955", "Q9CQA3", "Q9WTP6", "P84090", "Q91Z53", "Q8BG05", "O35737", "P70404", "O08709", "P28063", "Q91X72", "O89086", "Q92945", "P10605", "Q8BH97", "Q9CZM2", "O54782", "O88342", "P34884", "P62158", "Q9HB71", "Q08209", "P07901", "Q60973", "P16045", "P14069", "P08670", "Q06830", "P48024", "P61979", "B2RPK0", "Q8BGD9", "Q9NR45", "Q14498", "P00558", "A8MW06", "P13639", "P09104", "Q86UX7", "P04406", "P49591", "P61981", "P14618", "Q9Y6R7", "Q14677", "Q7Z7H5", "Q15084", "P83731", "P08758", "P08238", "P61513", "P07355", "P62937", "P02042", "P29401"]
+  # proteins = ['Q05920','P16015','P03953','P19001','Q91WS0','O09165','P37804','P12787','Q05920','Q05920','Q9ET01','P04117','P19096','P19096','Q16762','P07356','Q8BFR5','Q8QZS1','Q8BMS1','Q8BH95','P58252','P48774','P31786','P30115','P61978','P07724','P49817','Q9CR68','P04117','Q61805','Q7TMF3','P03953','P07724','P31725','Q3UIU2','P56480','P07910','Q8VEK3','P29699','O09164','Q60932','O88696','Q00839','P31725','P10649','P01791','Q8R1I1','P01027','Q8VEK3','P49945','Q80W21','Q9CPQ1','P53996','P01873','Q8NC51','O88569','O35955','Q9CQA3','P31725','Q9WTP6','P84090','Q91Z53','Q8BG05','O35737','P70404','O08709','P28063','Q91X72','O89086','P07724','Q91X72','Q92945','P10605','Q8BH97','P07724','P07724','Q9CZM2','O54782','O88342','P34884','P62158','Q9HB71','Q08209','P07901','Q60973','P20152','P16045','P14069','P08670','Q06830','P08670','P48024','P61979','B2RPK0','Q8BGD9']
+  # all proteins 
+  proteins = ['A8MW06','B2RPK0','O08583','O08586','O08709','O08795','O09164','O09164','O09165','O14556','O15144','O15428','O15511','O35129','O35215','O35639','O35639','O35737','O35955','O54782','O75190','O75832','O88342','O88569','O88696','O88844','O89023','O89086','O89086','O95456','P00558','P01027','P01027','P01027','P01746','P01791','P01873','P01887','P02042','P02088','P02088','P02089','P02089','P02463','P03953','P03953','P03958','P04117','P04117','P04406','P06745','P07355','P07356','P07356','P07724','P07724','P07724','P07724','P07724','P07724','P07724','P07724','P07724','P07901','P07901','P07910','P08030','P08113','P08228','P08228','P08238','P08249','P08249','P08670','P08670','P08670','P08758','P09104','P10107','P10126','P10126','P10605','P10605','P10649','P10853','P12787','P13639','P13639','P14069','P14618','P14618','P15954','P16015','P16045','P17182','P17742','P17742','P19001','P19096','P19096','P19096','P19157','P19253','P19387','P19783','P20029','P20152','P20152','P20152','P21107','P21981','P23528','P24452','P24452','P26883','P27773','P28063','P28656','P29401','P29699','P30115','P31230','P31725','P31725','P31725','P31786','P34884','P35564','P37804','P46471','P47199','P47753','P47754','P47756','P48024','P48036','P48036','P48036','P48774','P49591','P49817','P49945','P49962','P50395','P51410','P52565','P53996','P54071','P56480','P56480','P58252','P58252','P60709','P60709','P60709','P60709','P60709','P60710','P60710','P60710','P60867','P61161','P61513','P61978','P61978','P61979','P61981','P62137','P62158','P62259','P62259','P62631','P62631','P62736','P62736','P62736','P62937','P63017','P63017','P63087','P63101','P63272','P67812','P67936','P68036','P68134','P68134','P68134','P68134','P68134','P68134','P68134','P68134','P68134','P68134','P68134','P68254','P68369','P68369','P68369','P68371','P68371','P70195','P70349','P70404','P80314','P80317','P83731','P84090','P97351','P97379','P97379','P97493','P97821','Q00839','Q00839','Q01768','Q01853','Q03265','Q05816','Q05920','Q05920','Q05920','Q06830','Q08209','Q14498','Q14677','Q15084','Q16740','Q16762','Q3UIU2','Q562R1','Q562R1','Q5SW19','Q60710','Q60932','Q60972','Q60973','Q61171','Q61792','Q61792','Q61805','Q61838','Q62093','Q7TMF3','Q7Z7H5','Q80W21','Q86UX7','Q8BFR5','Q8BG05','Q8BG05','Q8BGD9','Q8BH95','Q8BH97','Q8BIJ6','Q8BJW6','Q8BJZ4','Q8BMS1','Q8CB59','Q8CDN6','Q8CI94','Q8JZQ9','Q8NC51','Q8QZS1','Q8QZT1','Q8R1I1','Q8VEK3','Q8VEK3','Q91WQ3','Q91WS0','Q91X72','Q91X72','Q91YI0','Q91YQ5','Q91YR1','Q91Z53','Q923D2','Q92945','Q92945','Q99798','Q99JI4','Q99JW2','Q99KJ8','Q99NB9','Q99PT1','Q9CPQ1','Q9CQ71','Q9CQA3','Q9CQQ7','Q9CQV8','Q9CQV8','Q9CR21','Q9CR51','Q9CR68','Q9CWF2','Q9CWF2','Q9CWF2','Q9CWF2','Q9CWF2','Q9CWF2','Q9CXW4','Q9CYG7','Q9CYR0','Q9CYR0','Q9CZM2','Q9CZM2','Q9CZX8','Q9CZY3','Q9D0F3','Q9D1A2','Q9D211','Q9D2M8','Q9D8E6','Q9D8N0','Q9D8T7','Q9D8Y0','Q9DAU1','Q9DBG6','Q9DBJ1','Q9EQQ9','Q9ERE7','Q9ET01','Q9HB40','Q9HB71','Q9JII6','Q9JL62','Q9NR45','Q9QUH0','Q9QZD9','Q9R0P3','Q9R0Q7','Q9R1T2','Q9WTM5','Q9WTP6','Q9WVK4','Q9Y493','Q9Y5R8','Q9Y6R7','Q9Z0J0','Q9Z0N1','Q9Z2X1']
+  cl = 'cleaves'
+  ci = 'inhibits'
+  species = 'Mus musculus'
+  
+  
+  filename ='101006-3A-all-direct-network'
+  
+  path = '/Users/PhilippLange/Documents/science/data/data-analysis/'
+  date = Date::today.to_s
+  Dir.chdir(path)
+  Dir.mkdir(date) unless  File.exists?(date)
+  Dir.chdir(date)
+  
+  @plist = Array.new
+  
+  FasterCSV.open("#{filename}.csv", "w") do |csv|
+    csv << ['protein A','interaction','protein B']
+    
+    proteins.each do |ac|
+      p = Protein.ac_is(ac).first
+      if p
+        @plist << ac
+        
+        s = p.substrates.*.ac
+        
+        s.each do |sac|
+          if Protein.ac_is(sac).first.oss.*.name.include?(species)
+            @plist << sac 
+            csv << [ac,cl,sac]
+          end
+        end
+        
+        proteases = p.proteases.*.ac
+        proteases.each do |pac|
+          if Protein.ac_is(pac).first.oss.*.name.include?(species)
+            @plist << pac
+            csv << [pac,cl,ac]
+          end
+        end
+        
+        i = p.inhibitors.*.ac
+        i.each do |iac|
+          if Protein.ac_is(iac).first.oss.*.name.include?(species)
+            @plist << iac
+            csv << [iac,ci,ac]
+          end
+        end
+        
+        inhibited_proteases = p.inhibited_proteases.*.ac
+        inhibited_proteases.each do |ipac|
+          if Protein.ac_is(ipac).first.oss.*.name.include?(species)
+            @plist << ipac
+            csv << [ac,ci,ipac]
+          end
+        end
+                
+      end
+    end
+  end
+
+  FasterCSV.open("#{filename}_annotation.csv", "w", {:col_sep => ';'}) do |csv|
+  csv << ['ac','short','long','REFSEQ','GeneID','EMBL','MEROPS','MEROPS-first','inlist']
+
+    @plist.uniq!.each do |ac|
+      csvrow = Array.new
+      p = Protein.ac_is(ac).first      
+      csvrow << p.ac
+      csvrow << p.name
+      csvrow << p.recname
+      Dr.all(:conditions => {:protein_id => p.id, :db_name => 'RefSeq'}).empty? ? csvrow << '' : csvrow << "[#{Dr.all(:conditions => {:protein_id => p.id, :db_name => 'RefSeq'}).*.protein_name.join(',')}]" 
+      Dr.all(:conditions => {:protein_id => p.id, :db_name => 'GeneID'}).empty? ? csvrow << '' : csvrow << "[#{Dr.all(:conditions => {:protein_id => p.id, :db_name => 'GeneID'}).*.protein_name.join(',')}]" 
+      Dr.all(:conditions => {:protein_id => p.id, :db_name => 'EMBL'}).empty? ? csvrow << '' : csvrow << "[#{Dr.all(:conditions => {:protein_id => p.id, :db_name => 'EMBL'}).*.protein_name.join(',')}]"
+      Dr.all(:conditions => {:protein_id => p.id, :db_name => 'MEROPS'}).empty? ? csvrow << '' : csvrow << "[#{Dr.all(:conditions => {:protein_id => p.id, :db_name => 'MEROPS'}).*.protein_name.join(',')}]"      
+      Dr.all(:conditions => {:protein_id => p.id, :db_name => 'MEROPS'}).empty? ? csvrow << '' : csvrow << "#{Dr.all(:conditions => {:protein_id => p.id, :db_name => 'MEROPS'}).first.protein_name}"
+      if proteins.include?(ac)
+        csvrow << 'inlist'
+      else
+        csvrow << 'secondary'
+      end
+      csv << csvrow
+    end
+  end  
+end
+
+
+
+desc "export cleavages and inhibitions to csv for cytoscape"
+task :export_known_cleavages => :environment do
+  
+  require 'fastercsv'
+
+  filename = '101004-2D-extracell-known cleavages'
+
+  path = '/Users/PhilippLange/Documents/science/data/data-analysis/'
+  date = Date::today.to_s
+  Dir.chdir(path)
+  Dir.mkdir(date) unless  File.exists?(date)
+  Dir.chdir(date)
+
+  cls = [["P03953","26"],["P07356","25"],["P07724","445"],["Q61805","26"],["P03953","26"],["P07724","25"],["P29699","19"],["O09164","23"],["P01027","671"],["P01873","249"],["Q91X72","93"],["P07724","592"],["Q91X72","155"],["P10605","78"],["P07724","473"],["P07724","444"],["Q91WS0","2"],["P12787","38"],["P49817","2"],["Q9CR68","79"],["Q7TMF3","1"],["Q8R1I1","2"],["Q9CPQ1","2"],["Q9CQA3","31"],["Q9ET01","2"],["Q8QZS1","30"],["P31786","2"],["P31725","12"],["Q3UIU2","2"],["Q8VEK3","234"],["O88696","53"],["P31725","15"],["P01791","1"],["Q8VEK3","190"],["P49945","169"],["P31725","4"],["Q91Z53","7"],["P70404","39"],["O89086","28"]]
+  
+  FasterCSV.open("#{filename}.csv", "w") do |csv|
+  csv << ['ac','substrate name','position','protease','protease name','relevance','pos','pos-diff']  
+
+    cls.each do |cl|
+      ac = cl[0]
+      start = cl[1].to_i
+      range = start..start
+      seen = ''
+        
+      unless ac == ""
+        puts ac
+        p = Protein.ac_is(ac)
+        p ? p = p.first : 1
+        knowncls = p.inverse_cleavages.pos_in(range)
+        knowncls.each do |knowncl|
+          unless ac+start.to_s+knowncl.protease.ac == seen
+            traces = knowncl.traces.*.phys_relevance
+            csv << [ac,p.recname,start,knowncl.protease.ac,knowncl.protease.recname,traces.join('|'),knowncl.pos]
+            seen = ac+start.to_s+knowncl.protease.ac
+          end
+        end
+      end
+    end
+  end
+end
+
+
